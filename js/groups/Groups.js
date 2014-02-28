@@ -47,24 +47,24 @@ SquaresGroup = Group.clone().newSlots({
 	
 	addSquares: function()
 	{
-		var max = this._max
-		for (var x = -max; x < max; x ++)
+		var xmax = this._max
+		var ymax = this._max
+		
+		for (var x = -xmax; x < xmax; x ++)
 		{
-			for (var y = -max; y < max; y ++)
+			for (var y = -ymax; y < ymax; y ++)
 			{
-				//if (Math.random() < .6)
-				{
-					var s = Square.clone()
-					s._object.scale.x = .1
-					s._object.scale.y = .1
-					s._object.position.x = .2*x
-					s._object.position.y = .2*y
-					s.setGroupX(x)
-					s.setGroupY(y)
-					//s.setMover("x", XInterleveMover.clone())
-					//s.setMover("r", RandXMover.clone())
-					this.addItem(s)
-				}
+				var xoffset = (Math.abs(y) % 2)*.5
+				var s = Square.clone()
+				s._object.scale.x = .8
+				s._object.scale.y = .8
+				s._object.position.x = x + xoffset
+				s._object.position.y = y
+				s.setGroupX(x)
+				s.setGroupY(y)
+				//s.setMover("x", XInterleveMover.clone())
+				//s.setMover("r", RandXMover.clone())
+				this.addItem(s)
 			}
 		}
 	}

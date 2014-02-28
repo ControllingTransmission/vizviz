@@ -139,7 +139,7 @@ Visual = Proto.clone().newSlots({
 		this.setCamera(new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 8000))
 		this.camera().position.x = 0;
 		this.camera().position.y = 0;
-		this.camera().position.z = 3;
+		this.camera().position.z = 15;
 		this.camera().lookAt(new THREE.Vector3(0, 0, 0));		
 	},
 	
