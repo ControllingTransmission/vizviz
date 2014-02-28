@@ -1,4 +1,4 @@
-exitonly
-========
+Wave Wave
+=========
 
-viz for exitonly at codame 2013
+viz for Wave Wave game thing
