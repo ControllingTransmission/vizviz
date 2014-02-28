@@ -31,8 +31,8 @@ TargetPoint = Proto.clone().newSlots({
 	step: function()
 	{
 		this._t ++
-		this.move()
-		this.follow()
+		// this.move()
+		// this.follow()
 	}
 })
 

@@ -11,8 +11,8 @@ Prism = Thing.clone().newSlots({
 	setup: function()
 	{		
 		// radiusAtTop, radiusAtBottom, height, segmentsAroundRadius, segmentsAlongHeight,
-		var geometry = new THREE.CylinderGeometry( 1, 1, 1, 6, 4 );
-		
+		var geometry = new THREE.CylinderGeometry( .58, .58, 1, 3, 3 );
+
 		var material = new THREE.MeshLambertMaterial( 
 			{
 				color: new THREE.Color().setRGB(0,0,0), 
@@ -23,6 +23,9 @@ Prism = Thing.clone().newSlots({
 			} );
 
 	    this._object = new THREE.Mesh(geometry, material);
+	    this._object.geometry.applyMatrix( new THREE.Matrix4().makeRotationX( Math.PI/2 ) );
+	    this._object.geometry.applyMatrix( new THREE.Matrix4().makeRotationZ( Math.PI/2 ) );
+		this._object.geometry.verticesNeedUpdate = true;
 	},
 
 /*

@@ -58,11 +58,11 @@ WaveGroup = Group.clone().newSlots({
 		var xmax = this._max*10
 		for (var x = -xmax; x < xmax; x ++)
 		{
-			var s = Triangle.clone()
+			var s = Prism.clone()
 			s._object.scale.x = 1
 			s._object.scale.y = 1
 			s._object.position.x = (x + xoffset) + y/2
-			s._object.position.y = y*.89 - inverted*h/3
+			s._object.position.y = y*.869 - inverted*h/3
 		
 			//if (invert)
 			{
@@ -71,15 +71,18 @@ WaveGroup = Group.clone().newSlots({
 			s.setGroupX(x)
 			s.setGroupY(y)
 		
-			var r = Math.random()
-			s.setColor(new THREE.Color().setRGB(r,r,r))
+			// var r = Math.random()
+			// s.setColor(new THREE.Color().setRGB(r,r,r))
+			var c = Palettes.current().foregroundColors();
+			var cc = c[Math.floor(Math.random()*c.length)];
+			s.setColor(new THREE.Color(cc))
 			this.addItem(s)	
 		}	
 	},
 	
 	addSquares: function()
 	{
-		var ymax = this._max
+		var ymax = this._max-1
 		
 		for (var y = -ymax; y < ymax+1; y ++)
 		{

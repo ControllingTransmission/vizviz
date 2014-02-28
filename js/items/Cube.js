@@ -10,7 +10,7 @@ Cube = Thing.clone().newSlots({
 	
 	setup: function()
 	{		
-		var geometry = new THREE.CubeGeometry(500, 500, 500, 1, 1);
+		var geometry = new THREE.CubeGeometry(1, 1, 1, 1, 1);
 		
 		var material = new THREE.MeshLambertMaterial( 
 			{
