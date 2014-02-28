@@ -10,7 +10,7 @@ Triangle = Thing.clone().newSlots({
 	
 	setup: function()
 	{		
-		var geometry = new THREE.CircleGeometry(1, 3);
+		var geometry = new THREE.CircleGeometry(.6, 3);
 	
 		var material = new THREE.MeshLambertMaterial( 
 			{
