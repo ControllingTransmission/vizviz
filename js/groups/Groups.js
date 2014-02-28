@@ -49,6 +49,7 @@ SquaresGroup = Group.clone().newSlots({
 	{
 		var xmax = this._max
 		var ymax = this._max
+		var h = Math.sqrt(3)/2.0
 		
 		for (var x = -xmax; x < xmax; x ++)
 		{
@@ -56,12 +57,13 @@ SquaresGroup = Group.clone().newSlots({
 			{
 				var xoffset = (Math.abs(y) % 2)*.5
 				var s = Square.clone()
-				s._object.scale.x = .8
-				s._object.scale.y = .8
+				s._object.scale.x = .99
+				s._object.scale.y = .99
 				s._object.position.x = x + xoffset
-				s._object.position.y = y
+				s._object.position.y = y*h
 				s.setGroupX(x)
 				s.setGroupY(y)
+				s.setColor(new THREE.Color().setRGB(Math.random(), Math.random(), Math.random()))
 				//s.setMover("x", XInterleveMover.clone())
 				//s.setMover("r", RandXMover.clone())
 				this.addItem(s)
