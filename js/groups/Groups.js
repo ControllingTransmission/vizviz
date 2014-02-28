@@ -55,7 +55,7 @@ SquaresGroup = Group.clone().newSlots({
 			for (var y = -ymax; y < ymax; y ++)
 			{
 				var xoffset = (Math.abs(y) % 2)*.5
-				var s = Square.clone()
+				var s = Triangle.clone()
 				s._object.scale.x = .8
 				s._object.scale.y = .8
 				s._object.position.x = x + xoffset

@@ -1,6 +1,6 @@
 
-Square = Thing.clone().newSlots({
-	protoType: "Square"
+Triangle = Thing.clone().newSlots({
+	protoType: "Triangle"
 }).setSlots({
 	init: function()
 	{
@@ -10,8 +10,8 @@ Square = Thing.clone().newSlots({
 	
 	setup: function()
 	{		
-		var geometry = new THREE.PlaneGeometry(1, 1, 10, 10);
-		
+		var geometry = new THREE.CircleGeometry(1, 3);
+	
 		var material = new THREE.MeshLambertMaterial( 
 			{
 				//color: new THREE.Color().setRGB(0,0,0), 
