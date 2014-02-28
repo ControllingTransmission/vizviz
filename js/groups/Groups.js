@@ -28,8 +28,8 @@ Groups = Proto.clone().newSlots({
 
 // ----------------------
 
-SquaresGroup = Group.clone().newSlots({
-	protoType: "SquaresGroup",
+WaveGroup = Group.clone().newSlots({
+	protoType: "WaveGroup",
 	items: null,
 	spacing: 500,
 	itemXScale: 1,
@@ -45,35 +45,52 @@ SquaresGroup = Group.clone().newSlots({
 		console.log("add sq")
 	},
 	
-	addSquares: function()
+	addRowAtY: function(y, inverted)
 	{
-		var xmax = this._max
-		var ymax = this._max
+		var xoffset = 0
 		var h = Math.sqrt(3)/2.0
+		var side = 2*1/h
 		
+		if (inverted)
+		{
+			xoffset = .5
+		}
+		var xmax = this._max*10
 		for (var x = -xmax; x < xmax; x ++)
 		{
-			for (var y = -ymax; y < ymax; y ++)
+			var s = Triangle.clone()
+			s._object.scale.x = 1
+			s._object.scale.y = 1
+			s._object.position.x = (x + xoffset)
+			s._object.position.y = y*.89 - inverted*h/3
+		
+			//if (invert)
 			{
-				var xoffset = (Math.abs(y) % 2)*.5
-				var s = Square.clone()
-				s._object.scale.x = .99
-				s._object.scale.y = .99
-				s._object.position.x = x + xoffset
-				s._object.position.y = y*h
-				
-				s.setGroupX(x)
-				s.setGroupY(y)
-				
-				var r = Math.random()
-				s.setColor(new THREE.Color().setRGB(r,r,r))
-				//s.setMover("x", XInterleveMover.clone())
-				//s.setMover("r", RandXMover.clone())
-				this.addItem(s)
+			 	s._object.rotation.z = Math.PI * (inverted) - Math.PI/2
 			}
+			s.setGroupX(x)
+			s.setGroupY(y)
+		
+			var r = Math.random()
+			s.setColor(new THREE.Color().setRGB(r,r,r))
+			this.addItem(s)	
+		}	
+	},
+	
+	addSquares: function()
+	{
+		var ymax = this._max
+		
+		for (var y = -ymax; y < ymax+1; y ++)
+		{
+			var invert = Math.abs(y) % 2 == 0
+			var xoffset = (Math.abs(y) % 2)*.5
+			
+			this.addRowAtY(y, 0)
+			this.addRowAtY(y, 1)
 		}
 	}
 })
 
-Groups.add(SquaresGroup) // for 0 key
-Groups.add(SquaresGroup)
+Groups.add(WaveGroup) // for 0 key
+Groups.add(WaveGroup)
