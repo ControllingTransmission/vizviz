@@ -61,7 +61,7 @@ WaveGroup = Group.clone().newSlots({
 			var s = Triangle.clone()
 			s._object.scale.x = 1
 			s._object.scale.y = 1
-			s._object.position.x = (x + xoffset)
+			s._object.position.x = (x + xoffset) + y/2
 			s._object.position.y = y*.89 - inverted*h/3
 		
 			//if (invert)
