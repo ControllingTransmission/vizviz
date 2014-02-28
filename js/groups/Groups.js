@@ -61,9 +61,12 @@ SquaresGroup = Group.clone().newSlots({
 				s._object.scale.y = .99
 				s._object.position.x = x + xoffset
 				s._object.position.y = y*h
+				
 				s.setGroupX(x)
 				s.setGroupY(y)
-				s.setColor(new THREE.Color().setRGB(Math.random(), Math.random(), Math.random()))
+				
+				var r = Math.random()
+				s.setColor(new THREE.Color().setRGB(r,r,r))
 				//s.setMover("x", XInterleveMover.clone())
 				//s.setMover("r", RandXMover.clone())
 				this.addItem(s)

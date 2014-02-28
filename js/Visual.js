@@ -3,6 +3,39 @@ Math.randomInt = function(min, max)
 	return Math.floor((Math.random()*(max - min))+1) +  min;
 }
 
+TargetPoint = Proto.clone().newSlots({
+	position: new THREE.Vector3( 0, 0, 0 ),
+	t: 0
+}).setSlots({
+	follow: function()
+	{
+		var camera = Visual.camera()
+		/*
+		var cp = camera.position
+		var p = this._position.clone()
+		p.sub(cp)
+		p.multiplyScalar(.9)
+		*/
+		
+		camera.lookAt(this._position)
+	},
+	
+	move: function()
+	{
+		var r = 5
+		this._position.setX(Math.cos(this._t*.05)*r)
+		this._position.setY(Math.sin(this._t*.05)*r)
+		this._position.setZ(0)
+	},
+	
+	step: function()
+	{
+		this._t ++
+		this.move()
+		this.follow()
+	}
+})
+
 Visual = Proto.clone().newSlots({
 	protoType: "Visual",
 	layers: null,
@@ -173,6 +206,8 @@ Visual = Proto.clone().newSlots({
 		}
 
 		this.render();
+		
+		TargetPoint.step()
 	},
 	
 	render: function()
