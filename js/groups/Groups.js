@@ -75,6 +75,26 @@ WaveGroup = Group.clone().newSlots({
 			// s.setColor(new THREE.Color().setRGB(r,r,r))
 			var c = Palettes.current().foregroundColors();
 			var cc = c[Math.floor(Math.random()*c.length)];
+			// console.log(Colors.hex2hsv(cc));
+			var chsv = Colors.hex2hsv(cc);
+			var crgb = Colors.hex2rgb(cc);
+
+			var crand = Math.random()
+			crgb.R = crgb.R + Math.floor(100*crand)
+			crgb.R = (crgb.R>=255 ? 255 : crgb.R)
+			crgb.G = crgb.G + Math.floor(100*crand)
+			crgb.G = (crgb.G>=255 ? 255 : crgb.G)
+			crgb.B = crgb.B + Math.floor(100*crand)
+			crgb.B = (crgb.B>=255 ? 255 : crgb.B)
+			// crgb.G += 50
+			// crgb.G = crgb.G - crgb.G%255
+			// crgb.B += 50
+			// crgb.B = crgb.B - crgb.B%255
+
+
+			cc = Colors.rgb2hex(crgb.R, crgb.G, crgb.B);
+
+			console.log(cc)
 			s.setColor(new THREE.Color(cc))
 			this.addItem(s)	
 		}	

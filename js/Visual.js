@@ -187,7 +187,7 @@ Visual = Proto.clone().newSlots({
 	setupLight: function()
 	{	
 		this.setLight(new THREE.DirectionalLight(0xffffff))
-		this.light().position.set(0, 50, 50);
+		this.light().position.set(0, 0, 10);
 		this.light().target.position.set(0, 0, 0);
 		this.scene().add(this.light())
 	},
