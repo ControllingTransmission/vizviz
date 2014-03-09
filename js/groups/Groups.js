@@ -30,7 +30,6 @@ Groups = Proto.clone().newSlots({
 
 WaveGroup = Group.clone().newSlots({
 	protoType: "WaveGroup",
-	items: null,
 	spacing: 500,
 	itemXScale: 1,
 	itemYScale: 1,

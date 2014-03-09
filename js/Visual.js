@@ -102,6 +102,7 @@ Visual = Proto.clone().newSlots({
 		
 		//this.addLayer(BackgroundGroup.clone())
 		//this.addLayer(SquaresGroup.clone().open())
+		this.toogleGroup(WaveGroup)
 		
 		this.animate()	
 		// document.body.style.backgroundColor = "red"
@@ -115,7 +116,7 @@ Visual = Proto.clone().newSlots({
 		//this.setup2DCamera()
 		//this.setupOrthoCamera()
 		this.setupLight()
-		this.setupEvents()
+		this.setupEvents()		
 	},
 	
 	setupRenderer: function()
@@ -243,6 +244,11 @@ Visual = Proto.clone().newSlots({
 		}
 		
 		return k
+	},
+	
+	toogleGroup: function(group)
+	{
+		this.toggleLayer(group.key(), group)
 	},
 	
 	selectLayerWithEvent: function(e)
