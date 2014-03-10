@@ -50,16 +50,24 @@ WaveStrip = Group.clone().newSlots({
 		
 		var black = new THREE.Color("#000000")
 
-
-		for (var y = 0; y < w.block().current()*2 + 1; y ++)
+		if (!w.block().doneRendered())
 		{
-			var h = y
-			if (w.block().isTop())
+			for (var y = 0; y < w.block().current()*2 + 1; y ++)
 			{
-				h = this.items().length - y - 1
+				var h = y
+				if (w.block().isTop())
+				{
+					h = this.items().length - y - 1
+				}
+				var triangle = this.items()[h]
+				triangle.setColor(black)
 			}
-			var triangle = this.items()[h]
-			triangle.setColor(black)
+			
+			if (w.block().isDone())
+			{
+				w.block().setDoneRendered(true)
+			}
+			
 		}
 
 	},
@@ -159,8 +167,10 @@ BlackBlock = Group.clone().newSlots({
 	current: 4,
 	max: 4,
 	goingDown: true,
-	done: false,
+	isDone: false,
 	isTop: false,
+	rebirthCountdown: 0,
+	doneRendered: false,
 }).setSlots({
 	init: function()
 	{
@@ -168,6 +178,9 @@ BlackBlock = Group.clone().newSlots({
 	
 	reset: function()
 	{
+		this.setMax(Math.floor(3 + Math.random()*3))
+		this._isTop = !this._isTop
+		
 		if (this.isTop())
 		{
 			this._current = 0
@@ -179,12 +192,26 @@ BlackBlock = Group.clone().newSlots({
 			this._goingDown = true
 		}
 		
+		this._doneRendered = false
+		
+		
 		this._isDone = false
+	},
+	
+	finish: function()
+	{
+		this._isDone = true
+		this._rebirthCountdown = this._max
+		if (!this._isTop)
+		{
+			this._rebirthCountdown = Math.floor(this._rebirthCountdown/2)
+		}
+		
 	},
 	
 	update: function()
 	{		
-		if (!this._done)
+		if (!this._isDone)
 		{		
 			if (this._goingDown)
 			{
@@ -192,7 +219,7 @@ BlackBlock = Group.clone().newSlots({
 				
 				if (this._current == 0)
 				{
-					this._done = true
+					this.finish()
 				}
 			}
 			else
@@ -201,8 +228,22 @@ BlackBlock = Group.clone().newSlots({
 								
 				if (this._current == this._max)
 				{
+					if (this._isTop)
+					{
+						this.finish()
+					}
+					
 					this._goingDown = true
 				}
+			}
+		}
+		
+		if (this._rebirthCountdown)
+		{
+			this._rebirthCountdown --
+			if (this._rebirthCountdown == 0)
+			{
+				this.reset()
 			}
 		}
 	}
@@ -276,7 +317,7 @@ WaveGroup = Group.clone().newSlots({
 		Group.update.apply(this)
 		this._t ++
 		
-		var rate = 20
+		var rate = 10
 		
 		Visual.camera().position.x += 1/rate;
 		

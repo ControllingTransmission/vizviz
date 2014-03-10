@@ -224,7 +224,7 @@ Visual = Proto.clone().newSlots({
 
 		this.render();
 		
-		TargetPoint.step()
+		//TargetPoint.step()
 	},
 	
 	render: function()
