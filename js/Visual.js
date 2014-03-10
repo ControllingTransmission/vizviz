@@ -42,7 +42,7 @@ Visual = Proto.clone().newSlots({
 	renderer: null,
 	camera: null,
 	scene: null,
-	light: null,
+	lights: [],
 	downKeys: {},
 	selectedLayer: null
 }).setSlots({
@@ -187,10 +187,26 @@ Visual = Proto.clone().newSlots({
 	
 	setupLight: function()
 	{	
-		this.setLight(new THREE.DirectionalLight(0xffffff))
-		this.light().position.set(0, 0, 10);
-		this.light().target.position.set(0, 0, 0);
-		this.scene().add(this.light())
+		var light1 = new THREE.DirectionalLight(0xffffff)
+		this.lights().push(light1)
+		light1.position.set(0, 0, 10);
+		light1.target.position.set(0, 0, 0);
+		light1.intensity = 0.5
+		this.scene().add(light1)
+
+		var light2 = new THREE.DirectionalLight(0xffffff)
+		this.lights().push(light2)
+		light2.position.set(-10, 5, 5);
+		light2.target.position.set(0, 0, 0);
+		light2.intensity = 0.5
+		this.scene().add(light2)
+
+		var light3 = new THREE.DirectionalLight(0xffffff)
+		this.lights().push(light3)
+		light3.position.set(-10, -5, 5);
+		light3.target.position.set(0, 0, 0);
+		light3.intensity = 0.5
+		this.scene().add(light3)
 	},
 
 	animate: function() 

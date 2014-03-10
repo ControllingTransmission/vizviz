@@ -58,6 +58,7 @@ WaveStrip = Group.clone().newSlots({
 		s._object.scale.x = 1
 		s._object.scale.y = 1
 		s._object.position.x = (x + xoffset) + y/2
+		s._object.position.z = 4
 
 		s._object.position.y = y*.869 
 
@@ -101,6 +102,8 @@ WaveStrip = Group.clone().newSlots({
 
 		//console.log(cc)
 		s.setColor(new THREE.Color(cc))
+		s.setMover(s, TriangleDropMover.clone())
+
 		this.addItem(s)			
 	},
 	
@@ -169,7 +172,7 @@ WaveGroup = Group.clone().newSlots({
 		{
 			this.addStrip()
 		}
-		Visual.camera().position.x += this.maxStripCount() - 5
+		Visual.camera().position.x += this.maxStripCount() - 8
 	},
 
 	removeStrip: function()
@@ -177,14 +180,14 @@ WaveGroup = Group.clone().newSlots({
 		var item = this.items().first()
 		if (item && this.items().length > this.maxStripCount())
 		{
-			this.cachedStrips().push(item)
+			//this.cachedStrips().push(item)
 			this.removeItem(item)
 		}
 	},
 	
 	newStrip: function()
 	{
-		var strip = this.cachedStrips().pop()
+		var strip = null //this.cachedStrips().pop()
 		if (strip == null)
 		{
 			strip = WaveStrip.clone()
@@ -210,7 +213,7 @@ WaveGroup = Group.clone().newSlots({
 		Group.update.apply(this)
 		this._t ++
 		
-		var rate = 3
+		var rate = 10
 		
 		Visual.camera().position.x += 1/rate;
 		
