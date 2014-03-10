@@ -28,7 +28,7 @@ TriangleDropMover = Mover.clone().newSlots({
 }).setSlots({
 	update: function()
 	{
-		this.object().position.z = this.object().position.z * 0.9
+		this.object().position.z = this.object().position.z * 0.97
 		// if(this.object().position.z > 0)
 		// 	this.object().position.z = this.object().position.z * 0.9
 		// if(this.object().position.z < 0.01)
