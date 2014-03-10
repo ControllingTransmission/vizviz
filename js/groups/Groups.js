@@ -50,17 +50,18 @@ WaveStrip = Group.clone().newSlots({
 		
 		var black = new THREE.Color("#000000")
 
-		for (var y = 0; y < w.bottomBlock().current()*2 + 1; y ++)
+
+		for (var y = 0; y < w.block().current()*2 + 1; y ++)
 		{
-			var triangle = this.items()[y]
+			var h = y
+			if (w.block().isTop())
+			{
+				h = this.items().length - y - 1
+			}
+			var triangle = this.items()[h]
 			triangle.setColor(black)
 		}
-		
-		for (var y = 0; y < w.bottomBlock().current()*2 + 1; y ++)
-		{
-			var triangle = this.items()[y]
-			triangle.setColor(black)
-		}
+
 	},
 
 	addXY: function(x, y, inverted)
@@ -156,9 +157,26 @@ BlackBlock = Group.clone().newSlots({
 	max: 4,
 	goingDown: true,
 	done: false,
+	isTop: false,
 }).setSlots({
 	init: function()
 	{
+	},
+	
+	reset: function()
+	{
+		if (this.isTop())
+		{
+			this._current = 0
+			this._goingDown = false
+		}
+		else
+		{
+			this._current = this.max()
+			this._goingDown = true
+		}
+		
+		this._isDone = false
 	},
 	
 	update: function()
@@ -167,7 +185,6 @@ BlackBlock = Group.clone().newSlots({
 		{		
 			if (this._goingDown)
 			{
-				//console.log("down current: ", this._current, this._max)
 				this._current --
 				
 				if (this._current == 0)
@@ -178,9 +195,7 @@ BlackBlock = Group.clone().newSlots({
 			else
 			{
 				this._current ++
-				
-				//console.log("up current: ", this._current, this._max)
-				
+								
 				if (this._current == this._max)
 				{
 					this._goingDown = true
@@ -201,9 +216,7 @@ WaveGroup = Group.clone().newSlots({
 	currentX: 0,
 	cachedStrips: null,
 	maxStripCount: 25,
-	topBlock: BlackBlock.clone(),
-	bottomBlock: BlackBlock.clone(),
-	
+	block: BlackBlock.clone(),	
 }).setSlots({
 	init: function()
 	{
@@ -218,6 +231,7 @@ WaveGroup = Group.clone().newSlots({
 		}
 		
 		Visual.camera().position.x += this.maxStripCount() - 8
+		this.block().reset()
 	},
 
 	removeStrip: function()
@@ -266,13 +280,9 @@ WaveGroup = Group.clone().newSlots({
 		if (this._t % rate == 0)
 		{
 			var strip = this.addStrip()
-
-			this._bottomBlock.update()
-			this._topBlock.update()
+			this._block.update()
 			strip.setWaveGroup(this)
 		}
-		
-
 	}
 })
 
