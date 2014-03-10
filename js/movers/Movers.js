@@ -23,14 +23,29 @@ Movers = Mover.clone().newSlots({
 	}
 })	
 
+TriangleDropMover = Mover.clone().newSlots({
+	protoType: "TriangleDropMover",
+}).setSlots({
+	update: function()
+	{
+		this.object().position.z = this.object().position.z * 0.9
+		// if(this.object().position.z > 0)
+		// 	this.object().position.z = this.object().position.z * 0.9
+		// if(this.object().position.z < 0.01)
+		// 	this.object().position.z = 0
+	}
+})
+
+Movers.add(TriangleDropMover)
+
 HighlightJitterColorMover = Mover.clone().newSlots({
 	protoType: "HighlightJitterColorMover",
 	key: "Q"
 }).setSlots({
 	prepareToStop: function()
 	{
-		//this.revertColor()
-		this.setColor(new THREE.Color().setRGB(0, 0, 0))
+		this.setColor(this.originalMaterial().color)
+		// this.setColor(new THREE.Color().setRGB(0, 0, 0))
 	},
 
 	update: function() 
@@ -121,29 +136,55 @@ Movers.add(ScaleMover)
 // -----------------------------------------------------
 
 
-RScaleMover = Mover.clone().newSlots({
-	protoType: "RScaleMover",
+
+WaveMover = Mover.clone().newSlots({
+	protoType: "WaveMover",
+	amplitude: 2000,
+	period: 100,
 	key: "R"
 }).setSlots({
-	init: function()
-	{
-		Mover.init.apply(this)
-	},
-	
 	prepareToStop: function()
 	{
-		this.object().scale = this.originalScale()
+		this.object().scale.z = 1
 	},
 
 	update: function() 
 	{	
-		Mover.update.apply(this)
-		
-		this.object().scale[this.orientation()] = Math.random()
+		var x = this.object().position.x
+		var y = this.object().position.y
+		var r = Math.sqrt(x*x + y*y)
+		var tt = r + Math.PI*this._t/this._period
+		this.object().scale.z = (Math.sin(tt)+1) * 0.5 * this._amplitude
+		this._t ++	
 	}
 })
 
-Movers.add(RScaleMover)
+Movers.add(WaveMover)
+
+
+// RScaleMover = Mover.clone().newSlots({
+// 	protoType: "RScaleMover",
+// 	key: "R"
+// }).setSlots({
+// 	init: function()
+// 	{
+// 		Mover.init.apply(this)
+// 	},
+	
+// 	prepareToStop: function()
+// 	{
+// 		this.object().scale = this.originalScale()
+// 	},
+
+// 	update: function() 
+// 	{	
+// 		Mover.update.apply(this)
+		
+// 		this.object().scale[this.orientation()] = Math.random()
+// 	}
+// })
+
+// Movers.add(RScaleMover)
 
 // -----------------------------------------------------
 
