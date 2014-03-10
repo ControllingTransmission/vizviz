@@ -290,7 +290,7 @@ WaveGroup = Group.clone().newSlots({
 		
 		if (this._t % rate == 0)
 		{
-			var strip = this.addStrip()
+			var strip = this.addStrip().setupDropMover()
 			this._block.update()
 			strip.setWaveGroup(this)
 		}
