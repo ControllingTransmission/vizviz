@@ -22,6 +22,21 @@ Thing = Proto.clone().newSlots({
 		return this.object().material.opacity
 	},
 	
+	setX: function(v)
+	{
+		this._object.position.x = v
+	},
+	
+	setY: function(v)
+	{
+		this._object.position.y = v
+	},
+	
+	setZ: function(v)
+	{
+		this._object.position.z = v
+	},
+	
 	setOpacity: function(v)
 	{
 		var mat = this.object().material
