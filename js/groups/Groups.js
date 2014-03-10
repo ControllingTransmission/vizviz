@@ -267,7 +267,7 @@ WaveGroup = Group.clone().newSlots({
 	key: "1",
 	currentX: 0,
 	cachedStrips: null,
-	maxStripCount: 25,
+	maxStripCount: 30,
 	block: BlackBlock.clone(),	
 }).setSlots({
 	init: function()
@@ -282,7 +282,7 @@ WaveGroup = Group.clone().newSlots({
 			this.addStrip()
 		}
 		
-		Visual.camera().position.x += this.maxStripCount() - 8
+		TargetPoint.position().x += this.maxStripCount() - 15
 		this.block().reset()
 	},
 
@@ -329,7 +329,8 @@ WaveGroup = Group.clone().newSlots({
 		
 		//Visual.camera().position.x += 1/rate;
 		
-		TargetPoint.position().x = this._currentX
+		TargetPoint.position().x += 1/rate;
+		//TargetPoint.position().x = this._currentX;
 		
 		if (this._t % rate == 0)
 		{

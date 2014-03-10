@@ -19,8 +19,9 @@ TargetPoint = Proto.clone().newSlots({
 		p.sub(cp)
 		p.multiplyScalar(.9)
 		*/
-		
+
 		camera.lookAt(this._position)
+		camera.rotateOnAxis( new THREE.Vector3( 0, 0, 1 ), -Math.PI/2);
 	},
 	
 	move: function()
