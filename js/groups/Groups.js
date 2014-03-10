@@ -46,6 +46,8 @@ WaveStrip = Group.clone().newSlots({
 	
 	setWaveGroup: function(w)
 	{
+		console.log("setWaveGroup")
+		
 		this._waveGroup = w
 		
 		var black = new THREE.Color("#000000")
@@ -67,9 +69,7 @@ WaveStrip = Group.clone().newSlots({
 			{
 				w.block().setDoneRendered(true)
 			}
-			
 		}
-
 	},
 
 	addXY: function(x, y, inverted)
@@ -331,7 +331,8 @@ WaveGroup = Group.clone().newSlots({
 		
 		if (this._t % rate == 0)
 		{
-			var strip = this.addStrip().setupDropMover()
+			var strip = this.addStrip()
+			strip.setupDropMover()
 			this._block.update()
 			strip.setWaveGroup(this)
 		}
