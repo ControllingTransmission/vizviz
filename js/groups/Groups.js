@@ -93,7 +93,6 @@ WaveGroup = Group.clone().newSlots({
 
 			cc = Colors.rgb2hex(crgb.R, crgb.G, crgb.B);
 
-			console.log(cc)
 			s.setColor(new THREE.Color(cc))
 			this.addItem(s)	
 		}	
