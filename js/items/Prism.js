@@ -11,7 +11,7 @@ Prism = Thing.clone().newSlots({
 	setup: function()
 	{		
 		// radiusAtTop, radiusAtBottom, height, segmentsAroundRadius, segmentsAlongHeight,
-		var geometry = new THREE.CylinderGeometry( .58, .58, 1, 3, 3 );
+		var geometry = new THREE.CylinderGeometry( .58, .58, .001, 3, 3 );
 
 		var material = new THREE.MeshLambertMaterial( 
 			{

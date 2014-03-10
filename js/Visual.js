@@ -287,7 +287,7 @@ Visual = Proto.clone().newSlots({
 		
 		if (k == "L") 
 		{
-			this.setBackgroundColor(.2, .2, .2)
+			this.setBackgroundColor(0, 0, 0)
 			return 
 		}
 		
