@@ -102,7 +102,7 @@ Visual = Proto.clone().newSlots({
 		
 		//this.addLayer(BackgroundGroup.clone())
 		//this.addLayer(SquaresGroup.clone().open())
-		this.toogleGroup(WaveGroup)
+		this.toggleGroup(WaveGroup)
 		
 		this.animate()	
 		// document.body.style.backgroundColor = "red"
@@ -246,7 +246,7 @@ Visual = Proto.clone().newSlots({
 		return k
 	},
 	
-	toogleGroup: function(group)
+	toggleGroup: function(group)
 	{
 		this.toggleLayer(group.key(), group)
 	},
@@ -287,7 +287,7 @@ Visual = Proto.clone().newSlots({
 		
 		if (k == "L") 
 		{
-			this.setBackgroundColor(.2, .2, .2)
+			this.setBackgroundColor(0, 0, 0)
 			return 
 		}
 		

@@ -142,7 +142,7 @@ BlackBlock = Group.clone().newSlots({
 	{
 		
 	}
-}	
+})	
 	
 WaveGroup = Group.clone().newSlots({
 	protoType: "WaveGroup",
