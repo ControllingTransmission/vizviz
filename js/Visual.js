@@ -4,14 +4,15 @@ Math.randomInt = function(min, max)
 }
 
 TargetPoint = Proto.clone().newSlots({
-	position: new THREE.Vector3( 0, 0, 0 ),
+	position: new THREE.Vector3( 0, 0, 1 ),
 	t: 0
 }).setSlots({
 	follow: function()
 	{
 		var camera = Visual.camera()
 		
-		camera.position.x -= (camera.position.x - this._position.x)*.1
+		camera.position.x -= (camera.position.x - this._position.x)*.01
+		camera.position.z -= (camera.position.z - this._position.z)*.01
 		/*
 		var cp = camera.position
 		var p = this._position.clone()
