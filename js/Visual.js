@@ -10,6 +10,8 @@ TargetPoint = Proto.clone().newSlots({
 	follow: function()
 	{
 		var camera = Visual.camera()
+		
+		camera.position.x -= (camera.position.x - this._position.x)*.1
 		/*
 		var cp = camera.position
 		var p = this._position.clone()
@@ -23,16 +25,17 @@ TargetPoint = Proto.clone().newSlots({
 	move: function()
 	{
 		var r = 5
-		this._position.setX(Math.cos(this._t*.05)*r)
-		this._position.setY(Math.sin(this._t*.05)*r)
+		//this._position.setX(Math.cos(this._t*.05)*r)
+		//this._position.setY(Math.sin(this._t*.05)*r)
 		this._position.setZ(0)
+		
 	},
 	
 	step: function()
 	{
 		this._t ++
 		// this.move()
-		// this.follow()
+		this.follow()
 	}
 })
 
@@ -224,7 +227,7 @@ Visual = Proto.clone().newSlots({
 
 		this.render();
 		
-		//TargetPoint.step()
+		TargetPoint.step()
 	},
 	
 	render: function()

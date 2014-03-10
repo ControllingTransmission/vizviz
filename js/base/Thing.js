@@ -131,6 +131,11 @@ Thing = Proto.clone().newSlots({
 		return this
 	},
 	
+	color: function()
+	{
+		return this._object.material
+	},
+	
 	toggleWireframe: function()
 	{
 		var mat = this.object().material

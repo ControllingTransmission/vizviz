@@ -327,7 +327,9 @@ WaveGroup = Group.clone().newSlots({
 		
 		var rate = 10
 		
-		Visual.camera().position.x += 1/rate;
+		//Visual.camera().position.x += 1/rate;
+		
+		TargetPoint.position().x = this._currentX
 		
 		if (this._t % rate == 0)
 		{
