@@ -87,7 +87,6 @@ WaveStrip = Group.clone().newSlots({
 		s._object.scale.x = 1
 		s._object.scale.y = 1
 		s._object.position.x = (x + xoffset) + y/2
-		s._object.position.z = 4
 
 		s._object.position.y = y*.869 
 
@@ -131,7 +130,6 @@ WaveStrip = Group.clone().newSlots({
 
 		//console.log(cc)
 		s.setColor(new THREE.Color(cc))
-		s.setMover(s, TriangleDropMover.clone())
 
 		this.addItem(s)			
 	},
@@ -157,6 +155,16 @@ WaveStrip = Group.clone().newSlots({
 			
 			this.addRowAtY(y, 0)
 		}		
+	},
+
+	setupDropMover: function()
+	{
+		for (var y = 0; y < this.items().length; y ++)
+		{
+			var triangle = this.items()[y]
+			triangle._object.position.z = 14 - Math.floor(y/2)*1.5
+			triangle.setMover(triangle, TriangleDropMover.clone())
+		}
 	}
 })
 
@@ -323,7 +331,7 @@ WaveGroup = Group.clone().newSlots({
 		
 		if (this._t % rate == 0)
 		{
-			var strip = this.addStrip()
+			var strip = this.addStrip().setupDropMover()
 			this._block.update()
 			strip.setWaveGroup(this)
 		}
