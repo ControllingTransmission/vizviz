@@ -21,7 +21,7 @@ Prism = Thing.clone().newSlots({
 				wireframe: false, 
 				wireframeLinewidth: 1,
 				opacity: 1,
-				transparent: true
+				transparent: false // faster if false
 			} );
 
 	    this._object = new THREE.Mesh(geometry, material);

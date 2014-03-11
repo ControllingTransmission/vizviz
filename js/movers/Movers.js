@@ -29,10 +29,16 @@ TriangleDropMover = Mover.clone().newSlots({
 	protoType: "TriangleDropMover",
 	key: ""
 }).setSlots({
+	prepareToStart: function()
+	{
+		//this.setOpacity(0.0)
+	},
+	
 	update: function()
 	{
 		this.position().z = this.position().z * 0.97
-
+		var op = this.opacity()
+		//this.setOpacity(op + (1-op)*.01)
 		if(this.position().z < 0.01)
 		{
 			this.position().z = 0
@@ -47,7 +53,7 @@ Movers.add(TriangleDropMover)
 
 TriangleBlockMover = Mover.clone().newSlots({
 	protoType: "TriangleBlockMover",
-	maxHeight: 1,
+	maxHeight: 3,
 	defaultHeight: .001, // Prism.defaultHeight()
 	key: "",
 	shouldStart: false,

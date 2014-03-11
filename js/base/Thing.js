@@ -158,7 +158,7 @@ Thing = Proto.clone().newSlots({
 		mat.needsUpdate = true
 		return this
 	},
-	
+		
 	increaseAlpha: function()
 	{
 		var mat = this.object().material

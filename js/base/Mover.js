@@ -54,6 +54,11 @@ Mover = Proto.clone().newSlots({
 		this.thing().setColor(c)
 	},
 	
+	opacity: function()
+	{
+		return this.thing().opacity()
+	},
+	
 	setOpacity: function(v)
 	{
 		this.thing().setOpacity(v)
