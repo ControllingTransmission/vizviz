@@ -23,20 +23,70 @@ Movers = Mover.clone().newSlots({
 	}
 })	
 
+// -------------------------------------------------
+
 TriangleDropMover = Mover.clone().newSlots({
 	protoType: "TriangleDropMover",
+	key: ""
 }).setSlots({
 	update: function()
 	{
-		this.object().position.z = this.object().position.z * 0.97
-		// if(this.object().position.z > 0)
-		// 	this.object().position.z = this.object().position.z * 0.9
-		// if(this.object().position.z < 0.01)
-		// 	this.object().position.z = 0
+		this.position().z = this.position().z * 0.97
+
+		if(this.position().z < 0.01)
+		{
+			this.position().z = 0
+			this.thing().removeMover(this)
+		}
 	}
 })
 
 Movers.add(TriangleDropMover)
+
+// -------------------------------------------------
+
+TriangleBlockMover = Mover.clone().newSlots({
+	protoType: "TriangleBlockMover",
+	maxHeight: 1,
+	defaultHeight: .001, // Prism.defaultHeight()
+	key: "",
+	shouldStart: false,
+	block: null
+}).setSlots({
+	update: function()
+	{	
+		if (this.shouldStart())
+		{
+			var targetScale = this.maxHeight()/this.defaultHeight()
+			var dz = (targetScale - this.object().scale.z)
+			this.object().scale.z += dz*.01
+			var h = this.object().scale.z*this.defaultHeight()
+			
+			this.object().position.z = h/2
+			
+			if (dz < .001)
+			{
+				this.thing().removeMover(this)
+			}
+		}
+		else if (this.position().z == 0)
+		{
+			this.setShouldStart(true)
+			//this.block().startBlockMovers()
+		}
+	},
+	
+	begin: function()
+	{
+		this.setShouldStart(true)
+		this.position().z = 0.01
+	},
+	
+})
+
+Movers.add(TriangleBlockMover)
+
+// -------------------------------------------------
 
 HighlightJitterColorMover = Mover.clone().newSlots({
 	protoType: "HighlightJitterColorMover",
@@ -399,6 +449,7 @@ Movers.add(FadeOutMover)
 
 // ------------------------------------------------------------------
 
+/*
 LeapMotionBackgroundGreyMover = Mover.clone().newSlots({
 	protoType: "LeapMotionBackgroundGreyMover",
 	key: "A",
@@ -512,6 +563,7 @@ LeapMotionBackgroundShadesMover = Mover.clone().newSlots({
 })
 
 Movers.add(LeapMotionBackgroundShadesMover)
+*/
 
 /*
 

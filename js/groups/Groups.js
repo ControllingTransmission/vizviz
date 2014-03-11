@@ -45,14 +45,13 @@ WaveStrip = Group.clone().newSlots({
 	},
 	
 	setWaveGroup: function(w)
-	{
-		console.log("setWaveGroup")
-		
+	{		
 		this._waveGroup = w
 		
 		var black = new THREE.Color("#000000")
-
-		if (!w.block().doneRendered())
+		var block = w.block()
+		
+		if (!block.doneRendered())
 		{
 			for (var y = 0; y < w.block().current()*2 + 1; y ++)
 			{
@@ -63,6 +62,10 @@ WaveStrip = Group.clone().newSlots({
 				}
 				var triangle = this.items()[h]
 				triangle.setColor(black)
+				var mover = TriangleBlockMover.clone().setBlock(block)
+				triangle.addMover(mover)
+				block.addBlockMover(mover)
+				
 			}
 			
 			if (w.block().isDone())
@@ -75,7 +78,6 @@ WaveStrip = Group.clone().newSlots({
 	addXY: function(x, y, inverted)
 	{
 		var h = Math.sqrt(3)/2.0
-		//var side = 2/h
 		
 		var xoffset = 0
 		if (inverted)
@@ -84,8 +86,7 @@ WaveStrip = Group.clone().newSlots({
 		}
 		
 		var s = Prism.clone()
-		s._object.scale.x = 1
-		s._object.scale.y = 1
+		s.reset()
 		s._object.position.x = (x + xoffset) + y/2
 
 		s._object.position.y = y*.869 
@@ -95,43 +96,22 @@ WaveStrip = Group.clone().newSlots({
 			s._object.position.y -= h/3
 		}
 		
-		//s._object.position.y = y*.869 - inverted*h/3
-	
-		//if (inverted)
-		{
-		 	s._object.rotation.z = Math.PI * (1-inverted) - Math.PI/2
-		}
+	 	s._object.rotation.z = Math.PI * (1-inverted) - Math.PI/2
 		
 		s.setGroupX(x)
 		s.setGroupY(y)
-	
-		// var r = Math.random()
-		// s.setColor(new THREE.Color().setRGB(r,r,r))
-		var c = Palettes.current().foregroundColors();
-		var cc = c[Math.floor(Math.random()*c.length)];
-		// console.log(Colors.hex2hsv(cc));
-		var chsv = Colors.hex2hsv(cc);
-		var crgb = Colors.hex2rgb(cc);
-
-		var crand = Math.random()
-		crgb.R = crgb.R + Math.floor(100*crand)
-		crgb.R = (crgb.R>=255 ? 255 : crgb.R)
-		crgb.G = crgb.G + Math.floor(100*crand)
-		crgb.G = (crgb.G>=255 ? 255 : crgb.G)
-		crgb.B = crgb.B + Math.floor(100*crand)
-		crgb.B = (crgb.B>=255 ? 255 : crgb.B)
-		// crgb.G += 50
-		// crgb.G = crgb.G - crgb.G%255
-		// crgb.B += 50
-		// crgb.B = crgb.B - crgb.B%255
-
-
-		cc = Colors.rgb2hex(crgb.R, crgb.G, crgb.B);
-
-		//console.log(cc)
-		s.setColor(new THREE.Color(cc))
+		s.setupColor()
 
 		this.addItem(s)			
+	},
+	
+	reset: function()
+	{
+		this.items().forEach(function(prism)
+		{
+			prism.setupColor()
+			prism.removeMovers()
+		})
 	},
 	
 	addRowAtY: function(y, inverted)
@@ -179,9 +159,24 @@ BlackBlock = Group.clone().newSlots({
 	isTop: false,
 	rebirthCountdown: 0,
 	doneRendered: false,
+	blockMovers: null
 }).setSlots({
 	init: function()
 	{
+		this.setBlockMovers([])
+	},
+	
+	addBlockMover: function(aMover)
+	{
+		this.blockMovers().push(aMover)
+		return this
+	},
+	
+	startBlockMovers: function()
+	{
+		this.blockMovers().forEach(function(aMover){
+			aMover.begin();
+		});
 	},
 	
 	reset: function()
@@ -201,7 +196,7 @@ BlackBlock = Group.clone().newSlots({
 		}
 		
 		this._doneRendered = false
-		
+		this.setBlockMovers([])
 		
 		this._isDone = false
 	},
@@ -214,7 +209,6 @@ BlackBlock = Group.clone().newSlots({
 		{
 			this._rebirthCountdown = Math.floor(this._rebirthCountdown/2)
 		}
-		
 	},
 	
 	update: function()
@@ -266,14 +260,14 @@ WaveGroup = Group.clone().newSlots({
 	orientation: "x",
 	key: "1",
 	currentX: 0,
-	cachedStrips: null,
+	//cachedStrips: null,
 	maxStripCount: 30,
 	block: BlackBlock.clone(),	
 }).setSlots({
 	init: function()
 	{
 		Group.init.apply(this)
-		this.setCachedStrips([])
+		//this.setCachedStrips([])
 		this.addStrip()
 		this._object.position.y -= 3.5
 		
@@ -282,7 +276,7 @@ WaveGroup = Group.clone().newSlots({
 			this.addStrip()
 		}
 		
-		TargetPoint.position().x += this.maxStripCount() - 15
+		TargetPoint.position().x += this.maxStripCount() - 16
 		this.block().reset()
 	},
 
@@ -299,11 +293,11 @@ WaveGroup = Group.clone().newSlots({
 	
 	newStrip: function()
 	{
-		var strip = null //this.cachedStrips().pop()
-		if (strip == null)
-		{
+		//var strip = this.cachedStrips().pop()
+		//if (strip == null)
+		//{
 			strip = WaveStrip.clone()
-		}
+		//}
 		return strip
 	},
 	
