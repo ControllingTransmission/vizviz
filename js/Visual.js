@@ -265,6 +265,31 @@ Visual = Proto.clone().newSlots({
 			this.cycle().turn()
 			return
 		}
+
+		if (k == "[")
+		{
+			Palettes.previous()
+			return
+		}
+
+		if (k == "]")
+		{
+			Palettes.next()
+			return
+		}
+				
+		/*
+		if (e.keyCode == 39) // right arrow
+		{
+			TargetPoint.turn()
+			return
+		}
+		else (e.keyCode == 37) // left arrow
+		{
+			TargetPoint.turn()
+			return
+		}
+		*/
 		
 		/*
 		if (k == ";") 
