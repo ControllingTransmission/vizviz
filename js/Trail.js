@@ -28,11 +28,13 @@ Trail = Group.clone().newSlots({
 		this.segments().push(seg)
 		this.addItem(seg)
 		
+		/*
 		if (this.segments().length > this.maxSegments())
 		{
 			var dead = this.segments().removeFirst()
 			this.removeItem(dead)
 		}
+		*/
 	},
 	
 	setEndPoint: function(end)

@@ -64,6 +64,8 @@ TargetPoint = Proto.clone().newSlots({
 		//camera.lookAt(look)
 		camera.lookAt(this._position)
 		camera.rotateOnAxis( new THREE.Vector3( 0, 0, 1 ), -(Math.PI/2)*Math.sin(this._t/100));
+		camera.rotateOnAxis( new THREE.Vector3( 0, 0, 1 ), (Math.PI)*Math.sin(this._t/150)*Math.sin(3 + this._t/150));
+		//camera.rotateOnAxis( new THREE.Vector3( 0, 0, 1 ), -(Math.PI/2)*this._t/30);
 		
 		var end = this._position.clone()
 		this.trail().setEndPoint(end)

@@ -15,7 +15,6 @@ TrailSegment = Thing.clone().newSlots({
 	
 	setup: function()
 	{
-		
 		var material = new THREE.MeshLambertMaterial( 
 			{
 				color: new THREE.Color().setRGB(0, 0, 0), 

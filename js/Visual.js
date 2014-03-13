@@ -14,6 +14,7 @@ Visual = Proto.clone().newSlots({
 	selectedLayer: null,
 	targetPoint: null,
 	cycle: null,
+	t: 0,
 }).setSlots({
 	go: function()
 	{
@@ -197,6 +198,11 @@ Visual = Proto.clone().newSlots({
 		
 		this.cycle().step()
 		this.targetPoint().step()
+		this._t ++
+		if (this._t % (60*5) == 0)
+		{
+			Palettes.next()
+		}
 	},
 	
 	render: function()

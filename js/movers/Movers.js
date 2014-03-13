@@ -36,10 +36,11 @@ TriangleDropMover = Mover.clone().newSlots({
 	
 	update: function()
 	{
-		this.position().z = this.position().z * 0.97
+		//this.position().z = this.position().z * 0.97
+		this.position().z = this.position().z * 0.95
 		var op = this.opacity()
 		//this.setOpacity(op + (1-op)*.01)
-		if(this.position().z < 0.01)
+		if(this.position().z < 0.03)
 		{
 			this.position().z = 0
 			this.thing().removeMover(this)
@@ -68,7 +69,7 @@ TriangleBlockMover = Mover.clone().newSlots({
 				
 			var targetScale = this.maxHeight()/this.defaultHeight()
 			var dz = (targetScale - this.object().scale.z)
-			this.object().scale.z += dz*.5
+			this.object().scale.z += dz*.05
 			var h = this.object().scale.z*this.defaultHeight()
 			
 			this.object().position.z = h/2

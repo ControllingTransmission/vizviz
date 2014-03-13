@@ -20,6 +20,7 @@ Cycle = Proto.clone().newSlots({
 		}
 
 		this.position().y += this._yDirection * .17;
+		//this.position().y += this._yDirection * 1/WaveGroup.rate()
 		
 		this.trail().setEndPoint(this.position().clone())
 	},
