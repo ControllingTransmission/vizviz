@@ -13,13 +13,13 @@ Prism = Thing.clone().newSlots({
 	setup: function()
 	{		
 		// radiusAtTop, radiusAtBottom, height, segmentsAroundRadius, segmentsAlongHeight,
-		var geometry = new THREE.CylinderGeometry( .58, .58, this.defaultHeight(), 3, 3 );
+		var geometry = new THREE.CylinderGeometry( .58, .58, this.defaultHeight(), 3, 1 );
 
 		var material = new THREE.MeshLambertMaterial( 
 			{
-				color: new THREE.Color().setRGB(0,0,0), 
+				color: new THREE.Color().setRGB(0, 0, 0), 
 				wireframe: false, 
-				wireframeLinewidth: 1,
+				wireframeLinewidth: 4,
 				opacity: 1,
 				transparent: false // faster if false
 			} );
