@@ -3,7 +3,6 @@ Math.randomInt = function(min, max)
 	return Math.floor((Math.random()*(max - min))+1) +  min;
 }
 
-
 Visual = Proto.clone().newSlots({
 	protoType: "Visual",
 	layers: null,
@@ -12,7 +11,9 @@ Visual = Proto.clone().newSlots({
 	scene: null,
 	lights: [],
 	downKeys: {},
-	selectedLayer: null
+	selectedLayer: null,
+	targetPoint: null,
+	cycle: null,
 }).setSlots({
 	go: function()
 	{
@@ -84,7 +85,9 @@ Visual = Proto.clone().newSlots({
 		//this.setup2DCamera()
 		//this.setupOrthoCamera()
 		this.setupLight()
-		this.setupEvents()		
+		this.setupEvents()	
+		this.setTargetPoint(TargetPoint.clone())	
+		this.setCycle(Cycle.clone())	
 	},
 	
 	setupRenderer: function()
@@ -192,7 +195,8 @@ Visual = Proto.clone().newSlots({
 
 		this.render();
 		
-		TargetPoint.step()
+		this.cycle().step()
+		this.targetPoint().step()
 	},
 	
 	render: function()
@@ -258,7 +262,7 @@ Visual = Proto.clone().newSlots({
 
 		if (e.keyCode == 38) // right arrow
 		{
-			TargetPoint.turn()
+			this.cycle().turn()
 			return
 		}
 

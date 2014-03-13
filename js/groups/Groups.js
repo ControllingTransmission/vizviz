@@ -276,10 +276,9 @@ WaveGroup = Group.clone().newSlots({
 			this.addStrip()
 		}
 		
-		TargetPoint.position().x += this.maxStripCount() - 16
+		Visual.cycle().position().x += this.maxStripCount() - 16
 		this.block().reset()
 		
-		this.addItem(TrailSegment.clone())
 	},
 
 	removeStrip: function()
@@ -325,8 +324,7 @@ WaveGroup = Group.clone().newSlots({
 		
 		//Visual.camera().position.x += 1/rate;
 		
-		TargetPoint.position().x += 1/rate;
-		//TargetPoint.position().x = this._currentX;
+		Visual.cycle().position().x += 1/rate;
 		
 		if (this._t % rate == 0)
 		{

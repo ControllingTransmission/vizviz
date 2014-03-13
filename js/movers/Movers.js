@@ -53,7 +53,7 @@ Movers.add(TriangleDropMover)
 
 TriangleBlockMover = Mover.clone().newSlots({
 	protoType: "TriangleBlockMover",
-	maxHeight: 3,
+	maxHeight: .5,
 	defaultHeight: .001, // Prism.defaultHeight()
 	key: "",
 	shouldStart: false,
@@ -63,15 +63,21 @@ TriangleBlockMover = Mover.clone().newSlots({
 	{	
 		if (this.shouldStart())
 		{
+			this.thing().object().material.wireframe.true
+			this.thing().object().material.needsUpdate = true
+				
 			var targetScale = this.maxHeight()/this.defaultHeight()
 			var dz = (targetScale - this.object().scale.z)
-			this.object().scale.z += dz*.01
+			this.object().scale.z += dz*.05
 			var h = this.object().scale.z*this.defaultHeight()
 			
 			this.object().position.z = h/2
 			
 			if (dz < .001)
 			{
+				this.thing().toggleWireframe()
+				//this.thing().object().material.wireframe.true
+				//this.thing().object().material.needsUpdate = true
 				this.thing().removeMover(this)
 			}
 		}

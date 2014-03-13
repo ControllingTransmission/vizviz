@@ -1,77 +1,77 @@
 
 
 TargetPoint = Proto.clone().newSlots({
-	position: new THREE.Vector3( 0, 0, 1 ),
+	position: null,
 	yForce: 0,
 	maxYForce:.1,
 	yVelocity: 0,
 	yDirection: 0,
-	t: 0
+	t: 0,
+	trail: null,
+	minDist: 10,
 }).setSlots({
+	init: function()
+	{
+		this.setPosition(new THREE.Vector3( 0, 0, 1 ))
+		this.setTrail(Trail.clone())
+		this.trail().open()
+	},	
+		
 	camera: function()
 	{
 		return Visual.camera()
 	},
-	
+
+	followTop: function()
+	{
+		var camera = this.camera()
+		var f = .01
+		camera.position.x -= (camera.position.x - this._position.x)*1
+		camera.position.y -= (camera.position.y - this._position.y)*f
+		camera.position.z -= (camera.position.z - this._position.z)*f
+		
+		var minZ = 10
+		if (camera.position.z < minZ)
+		{
+			camera.position.z = minZ
+		}
+
+	 	//var look = new THREE.Vector3(this._position.x, 0, this._position.z)
+		//camera.lookAt(look)
+		//camera.lookAt(this._position)
+		//camera.rotateOnAxis( new THREE.Vector3( 0, 0, 1 ), -Math.PI/2);
+		
+		var end = this._position.clone()
+		this.trail().setEndPoint(end)
+	},
+		
 	follow: function()
 	{
 		var camera = this.camera()
+		var f = .01
+		camera.position.x -= (camera.position.x - this._position.x)*f
+		camera.position.y -= (camera.position.y - this._position.y)*f
+		camera.position.z -= (camera.position.z - this._position.z)*f
 		
-		camera.position.x -= (camera.position.x - this._position.x)*.01
-		//camera.position.z -= (camera.position.z - this._position.z)*.01
+		var minZ = 6
+		if (camera.position.z < minZ)
+		{
+			camera.position.z = minZ
+		}
 
-	 	var look = new THREE.Vector3(this._position.x, 0, this._position.z)
-		camera.lookAt(look)
-		//camera.lookAt(this._position)
-		camera.rotateOnAxis( new THREE.Vector3( 0, 0, 1 ), -Math.PI/2);
-	},
-
-	turn: function()
-	{
-		if (this._yDirection == 0)
-		{
-			this._yDirection = 1
-		}
-		else
-		{
-			this._yDirection *= -1
-		}
-	},
+	 	//var look = new THREE.Vector3(this._position.x, 0, this._position.z)
+		//camera.lookAt(look)
+		camera.lookAt(this._position)
+		camera.rotateOnAxis( new THREE.Vector3( 0, 0, 1 ), -(Math.PI/2)*Math.sin(this._t/100));
 		
-	/*
-	applyYForce: function(f)
-	{
-		f = f *.01
-		//console.log("applyYForce ", f)
-		if (this._yForce < this._maxYForce)
-		{
-			this._yForce += f
-		}
-	},
-	*/
-	
-	move: function()
-	{
-		var y = this.camera().position.y
-		if (Math.abs(y) > 12)
-		{
-			this.camera().position.y = 12*y/Math.abs(y)
-			this._yDirection = this._yDirection*-1
-		}
-		
-		this.camera().position.y += this._yDirection*.3;
-/*
-		this._yVelocity += this._yForce
-		this.camera().position.y += this._yVelocity;
-		this._yVelocity *= .8
-		this._yForce *= .8
-		*/
+		var end = this._position.clone()
+		this.trail().setEndPoint(end)
 	},
 	
 	step: function()
 	{
 		this._t ++
-		this.move()
+		//this.move()
 		this.follow()
 	}
 })
