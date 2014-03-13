@@ -15,8 +15,19 @@ TrailSegment = Thing.clone().newSlots({
 	
 	setup: function()
 	{
+		
+		var material = new THREE.MeshLambertMaterial( 
+			{
+				color: new THREE.Color().setRGB(0, 0, 0), 
+				wireframe: false, 
+				wireframeLinewidth: 4,
+				opacity: 1,
+				transparent: false // faster if false
+			} );
+
+
 		var geometry = new THREE.PlaneGeometry( 100, 100 );
-		var material = new THREE.MeshBasicMaterial( {color: 0x000000, side: THREE.DoubleSide} );
+		//var material = new THREE.MeshBasicMaterial( { color: 0x000000, side: THREE.DoubleSide} );
 		this._object = new THREE.Mesh( geometry, material );
 		
 	    //this._object.geometry.applyMatrix( new THREE.Matrix4().makeTranslation(0, 0, 2) );

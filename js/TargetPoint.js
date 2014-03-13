@@ -25,10 +25,11 @@ TargetPoint = Proto.clone().newSlots({
 	followTop: function()
 	{
 		var camera = this.camera()
-		var f = .01
+		var f = .03
 		camera.position.x -= (camera.position.x - this._position.x)*1
-		camera.position.y -= (camera.position.y - this._position.y)*f
-		camera.position.z -= (camera.position.z - this._position.z)*f
+		//camera.position.y -= (camera.position.y - this._position.y)*f
+		camera.position.z -= (camera.position.z - this._position.z)*0.05 
+		//camera.position.z = 10 + Math.abs(camera.position.y)*4
 		
 		var minZ = 10
 		if (camera.position.z < minZ)
@@ -51,7 +52,7 @@ TargetPoint = Proto.clone().newSlots({
 		var f = .01
 		camera.position.x -= (camera.position.x - this._position.x)*f
 		camera.position.y -= (camera.position.y - this._position.y)*f
-		camera.position.z -= (camera.position.z - this._position.z)*f
+		camera.position.z -= (camera.position.z - this._position.z)*f 
 		
 		var minZ = 6
 		if (camera.position.z < minZ)
