@@ -63,6 +63,12 @@ Prism = Thing.clone().newSlots({
 		this.setColor(new THREE.Color(cc))
 	},
 
+	darken: function()
+	{
+		this.color().offsetHSL(0, 0, -0.7)
+		this.material().needsUpdate = true;
+	}
+
 /*
 	update: function() 
 	{	

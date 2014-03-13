@@ -48,7 +48,7 @@ WaveStrip = Group.clone().newSlots({
 	{		
 		this._waveGroup = w
 		
-		var black = new THREE.Color("#000000")
+		// var black = new THREE.Color("#000000")
 		var block = w.block()
 		
 		if (!block.doneRendered())
@@ -61,7 +61,7 @@ WaveStrip = Group.clone().newSlots({
 					h = this.items().length - y - 1
 				}
 				var triangle = this.items()[h]
-				triangle.setColor(black)
+				triangle.darken()
 				var mover = TriangleBlockMover.clone().setBlock(block)
 				triangle.addMover(mover)
 				block.addBlockMover(mover)

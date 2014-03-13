@@ -148,6 +148,11 @@ Thing = Proto.clone().newSlots({
 	
 	color: function()
 	{
+		return this._object.material.color
+	},
+
+	material: function()
+	{
 		return this._object.material
 	},
 	
