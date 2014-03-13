@@ -278,6 +278,8 @@ WaveGroup = Group.clone().newSlots({
 		
 		TargetPoint.position().x += this.maxStripCount() - 16
 		this.block().reset()
+		
+		this.addItem(TrailSegment.clone())
 	},
 
 	removeStrip: function()

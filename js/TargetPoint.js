@@ -18,7 +18,7 @@ TargetPoint = Proto.clone().newSlots({
 		var camera = this.camera()
 		
 		camera.position.x -= (camera.position.x - this._position.x)*.01
-		camera.position.z -= (camera.position.z - this._position.z)*.01
+		//camera.position.z -= (camera.position.z - this._position.z)*.01
 
 	 	var look = new THREE.Vector3(this._position.x, 0, this._position.z)
 		camera.lookAt(look)
