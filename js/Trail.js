@@ -23,7 +23,6 @@ Trail = Group.clone().newSlots({
 		{
 			seg.setStartPoint(current.endPoint().clone())
 			seg.setEndPoint(current.endPoint().clone())
-			//this.removeItem(current)
 		}
 		
 		this.segments().push(seg)

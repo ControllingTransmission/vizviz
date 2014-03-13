@@ -15,7 +15,7 @@ TrailSegment = Thing.clone().newSlots({
 	
 	setup: function()
 	{
-		var geometry = new THREE.PlaneGeometry( 1000, 1000 );
+		var geometry = new THREE.PlaneGeometry( 100, 100 );
 		var material = new THREE.MeshBasicMaterial( {color: 0x000000, side: THREE.DoubleSide} );
 		this._object = new THREE.Mesh( geometry, material );
 		

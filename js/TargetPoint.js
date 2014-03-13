@@ -6,7 +6,7 @@ TargetPoint = Proto.clone().newSlots({
 	maxYForce:.1,
 	yVelocity: 0,
 	yDirection: 0,
-	//t: 0,
+	t: 0,
 	trail: null,
 	minDist: 10,
 }).setSlots({
@@ -21,7 +21,30 @@ TargetPoint = Proto.clone().newSlots({
 	{
 		return Visual.camera()
 	},
-	
+
+	followTop: function()
+	{
+		var camera = this.camera()
+		var f = .01
+		camera.position.x -= (camera.position.x - this._position.x)*1
+		camera.position.y -= (camera.position.y - this._position.y)*f
+		camera.position.z -= (camera.position.z - this._position.z)*f
+		
+		var minZ = 10
+		if (camera.position.z < minZ)
+		{
+			camera.position.z = minZ
+		}
+
+	 	//var look = new THREE.Vector3(this._position.x, 0, this._position.z)
+		//camera.lookAt(look)
+		//camera.lookAt(this._position)
+		//camera.rotateOnAxis( new THREE.Vector3( 0, 0, 1 ), -Math.PI/2);
+		
+		var end = this._position.clone()
+		this.trail().setEndPoint(end)
+	},
+		
 	follow: function()
 	{
 		var camera = this.camera()
@@ -36,10 +59,10 @@ TargetPoint = Proto.clone().newSlots({
 			camera.position.z = minZ
 		}
 
-	 	var look = new THREE.Vector3(this._position.x, 0, this._position.z)
-		camera.lookAt(look)
+	 	//var look = new THREE.Vector3(this._position.x, 0, this._position.z)
+		//camera.lookAt(look)
 		camera.lookAt(this._position)
-		camera.rotateOnAxis( new THREE.Vector3( 0, 0, 1 ), -Math.PI/2);
+		camera.rotateOnAxis( new THREE.Vector3( 0, 0, 1 ), -(Math.PI/2)*Math.sin(this._t/100));
 		
 		var end = this._position.clone()
 		this.trail().setEndPoint(end)
@@ -47,6 +70,7 @@ TargetPoint = Proto.clone().newSlots({
 	
 	step: function()
 	{
+		this._t ++
 		//this.move()
 		this.follow()
 	}
