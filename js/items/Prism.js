@@ -40,6 +40,41 @@ Prism = Thing.clone().newSlots({
 	
 	setupColor: function()
 	{
+		var cc = null
+		if(Palettes.current().foregroundColors().length == 1) cc = this.fadeColor()
+		else cc = this.paletteColor();
+
+		this.setColor(new THREE.Color(cc))
+	},
+
+	fadeColor: function()
+	{
+		var c = Palettes.current().foregroundColors();
+		
+		// First two foreground colors fade from first to second in Y
+		var cc = c[0];
+		var chsv = Colors.hex2hsv(cc);
+		var crgb = Colors.hex2rgb(cc);
+
+		var cc2 = c[1];
+		var chsv2 = Colors.hex2hsv(cc2);
+		var crgb2 = Colors.hex2rgb(cc2);
+
+		var crand = Math.floor(Palettes.current().randomizationStrength()*(this.groupY()+2)*Math.random())
+		crgb.R = crgb.R + (crand * (crgb2.R - crgb.R))
+		crgb.R = (crgb.R>=255 ? 255 : crgb.R)
+		crgb.G = crgb.G + (crand * (crgb2.G - crgb.G))
+		crgb.G = (crgb.G>=255 ? 255 : crgb.G)
+		crgb.B = crgb.B + (crand * (crgb2.B - crgb.B))
+		crgb.B = (crgb.B>=255 ? 255 : crgb.B)
+
+		cc = Colors.rgb2hex(crgb.R, crgb.G, crgb.B);
+
+		return cc
+	},
+
+	paletteColor: function()
+	{
 		var c = Palettes.current().foregroundColors();
 		var cc = c[Math.floor(Math.random()*c.length)];
 		var chsv = Colors.hex2hsv(cc);
@@ -59,13 +94,12 @@ Prism = Thing.clone().newSlots({
 		
 		cc = Colors.rgb2hex(crgb.R, crgb.G, crgb.B);
 
-		//console.log(cc)
-		this.setColor(new THREE.Color(cc))
+		return cc
 	},
 
 	darken: function()
 	{
-		this.color().offsetHSL(0, 0, -0.7)
+		this.color().offsetHSL(0, 0, -0.9)
 		this.material().needsUpdate = true;
 	}
 
