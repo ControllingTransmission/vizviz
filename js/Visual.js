@@ -290,6 +290,12 @@ Visual = Proto.clone().newSlots({
 			return
 		}
 		
+		if (k == "P")
+		{
+			this.targetPoint().toggleAutoRotate()
+			return
+		}
+		
 		if (e.keyCode == 220) // backslash key
 		{
 			//console.log("nextFollowStyle")

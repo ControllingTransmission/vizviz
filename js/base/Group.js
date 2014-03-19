@@ -104,12 +104,15 @@ Group = Thing.clone().newSlots({
 	{
 		console.log(this.protoType() + " keydown '" + e.key + "' ", e.keyCode)
 		
+		/*
 		if (e.key == "P")
 		{
 			this.setIsPaused(true)
 			return
 		}
+		*/
 		
+		/*
 		if (e.key == "[")
 		{
 			this.setRate(this.rate()/2)
@@ -156,6 +159,7 @@ Group = Thing.clone().newSlots({
 			this.items().forEach(function (item) { item.decreaseAlpha() })
 			return
 		}
+		*/
 		
 		// wireframe
 
