@@ -22,7 +22,6 @@ Trail = Group.clone().newSlots({
 		if (current)
 		{
 			var p = current.endPoint()
-			//p = new THREE.Vector3( p.x, p.y, p.z )
 			seg.setStartPoint(p.clone())
 			seg.setEndPoint(p.clone())
 		}
