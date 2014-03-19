@@ -41,7 +41,7 @@ Prism = Thing.clone().newSlots({
 	setupColor: function()
 	{
 		var cc = null
-		if(Palettes.current().foregroundColors().length == 1) cc = this.fadeColor()
+		if(Palettes.current().foregroundColors().length == 2) cc = this.fadeColor()
 		else cc = this.paletteColor();
 
 		this.setColor(new THREE.Color(cc))
