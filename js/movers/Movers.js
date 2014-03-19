@@ -47,7 +47,7 @@ TriangleDropMover = Mover.clone().newSlots({
 	}
 })
 
-Movers.add(TriangleDropMover)
+//Movers.add(TriangleDropMover)
 
 // -------------------------------------------------
 
@@ -96,7 +96,7 @@ TriangleBlockMover = Mover.clone().newSlots({
 	
 })
 
-Movers.add(TriangleBlockMover)
+//Movers.add(TriangleBlockMover)
 
 // -------------------------------------------------
 
@@ -128,7 +128,7 @@ HighlightJitterColorMover = Mover.clone().newSlots({
 	}
 })
 
-Movers.add(HighlightJitterColorMover)
+//Movers.add(HighlightJitterColorMover)
 
 
 // -----------------------------------------------------
@@ -157,7 +157,7 @@ SetAlphaMover = Mover.clone().newSlots({
 	}
 })
 
-Movers.add(SetAlphaMover)
+//Movers.add(SetAlphaMover)
 
 
 // -----------------------------------------------------
@@ -193,7 +193,7 @@ ScaleMover = Mover.clone().newSlots({
 	}
 })
 
-Movers.add(ScaleMover)
+//Movers.add(ScaleMover)
 
 // -----------------------------------------------------
 
@@ -222,6 +222,36 @@ WaveMover = Mover.clone().newSlots({
 })
 
 Movers.add(WaveMover)
+
+
+WaveMoverX = Mover.clone().newSlots({
+	protoType: "WaveMoverX",
+	amplitude: .3,
+	period: 100,
+	key: "T",
+	refZ: 0,
+}).setSlots({
+	prepareToStart: function()
+	{
+		this._refZ = this._thing.z()
+	},
+	
+	prepareToStop: function()
+	{
+		this.object().position.z = this._refZ
+	},
+
+	update: function() 
+	{	
+		var x = this.object().position.x
+		var r = x
+		var tt = r + Math.PI*this._t/this._period
+		this.object().position.z = this._refZ + (Math.sin(tt)+1) * this._amplitude
+		this._t ++	
+	}
+})
+
+Movers.add(WaveMoverX)
 
 
 // RScaleMover = Mover.clone().newSlots({

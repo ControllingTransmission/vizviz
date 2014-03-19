@@ -27,14 +27,29 @@ Thing = Proto.clone().newSlots({
 		this._object.position.x = v
 	},
 	
+	x: function()
+	{
+		return this._object.position.x
+	},
+	
 	setY: function(v)
 	{
 		this._object.position.y = v
 	},
 	
+	y: function()
+	{
+		return this._object.position.y
+	},
+	
 	setZ: function(v)
 	{
 		this._object.position.z = v
+	},
+	
+	z: function()
+	{
+		return this._object.position.z
 	},
 	
 	setPosition: function(p)

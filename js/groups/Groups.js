@@ -349,6 +349,7 @@ WaveGroup = Group.clone().newSlots({
 			strip.setupDropMover()
 			this._block.update()
 			strip.setWaveGroup(this)
+			//Visual.cycle().position().x = strip.x();
 		}
 	}
 })

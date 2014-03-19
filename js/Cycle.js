@@ -8,6 +8,7 @@ Cycle = Proto.clone().newSlots({
 	{
 		this.setTrail(Trail.clone())
 		this.trail().open()
+		this.trail().addSegment()
 	},
 	
 	move: function()

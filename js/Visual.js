@@ -186,7 +186,7 @@ Visual = Proto.clone().newSlots({
 		var self = this
 		requestAnimationFrame(function () { self.animate() });
 		
-		TWEEN.update();
+		//TWEEN.update();
 		
 		for (var k in this.layers())
 		{
