@@ -53,7 +53,7 @@ TriangleDropMover = Mover.clone().newSlots({
 
 TriangleBlockMover = Mover.clone().newSlots({
 	protoType: "TriangleBlockMover",
-	maxHeight: .5,
+	maxHeight: 1,
 	defaultHeight: .001, // Prism.defaultHeight()
 	key: "",
 	shouldStart: false,
@@ -110,25 +110,26 @@ HighlightJitterColorMover = Mover.clone().newSlots({
 		// this.setColor(new THREE.Color().setRGB(0, 0, 0))
 	},
 
+
+
 	update: function() 
 	{	
 		Mover.update.apply(this)
 		var c = Math.random()
-		if (Math.random() < .07)
+		if (Math.random() < .007 && this.originalMaterial().color == this.thing().material().color)
 		{
 			//this.setColor(new THREE.Color().setRGB(2, 2, 2))
 			this.setColor(Palettes.current().highlight())
+			return
 			//console.log("set color ")
 		}
-		else
-		{
+		if(this.originalMaterial().color != this.thing().material().color)
 			this.setColor(this.originalMaterial().color)
-		}
 		//this._t ++	
 	}
 })
 
-//Movers.add(HighlightJitterColorMover)
+Movers.add(HighlightJitterColorMover)
 
 
 // -----------------------------------------------------

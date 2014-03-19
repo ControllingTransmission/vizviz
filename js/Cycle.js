@@ -15,7 +15,7 @@ Cycle = Proto.clone().newSlots({
 	{
 		var y = this.position().y
 		
-		if (Math.abs(y) > 12)
+		if (Math.abs(y) > 5)
 		{
 			this.turn()
 		}
