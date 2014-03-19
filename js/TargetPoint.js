@@ -66,6 +66,7 @@ TargetPoint = Proto.clone().newSlots({
 		//this._cameraRotTarget = -Math.PI/2
 		this._cameraRotTarget = 0
 		this.updateCameraRot()
+		camera.position.y = 0
 		
 		var end = this._position.clone()
 		this.trail().setEndPoint(end)

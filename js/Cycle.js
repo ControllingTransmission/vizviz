@@ -1,6 +1,6 @@
 
 Cycle = Proto.clone().newSlots({
-	position: new THREE.Vector3( 0, 0, 1 ),
+	position: new THREE.Vector3( 0, 0, .01 ),
 	yDirection: 0,
 	trail: null,
 }).setSlots({

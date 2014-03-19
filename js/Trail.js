@@ -21,8 +21,10 @@ Trail = Group.clone().newSlots({
 		
 		if (current)
 		{
-			seg.setStartPoint(current.endPoint().clone())
-			seg.setEndPoint(current.endPoint().clone())
+			var p = current.endPoint()
+			//p = new THREE.Vector3( p.x, p.y, p.z )
+			seg.setStartPoint(p.clone())
+			seg.setEndPoint(p.clone())
 		}
 		
 		this.segments().push(seg)
@@ -42,8 +44,14 @@ Trail = Group.clone().newSlots({
 		var current = this.currentSegment()
 		if (current)
 		{
-			current.setEndPoint(end.clone())
+			//var p = end
+			//p = new THREE.Vector3( p.x, p.y, p.z )
+			//p = new THREE.Vector3( p.x, 0, 1 )
+			
+			current.setEndPoint(end)
 			current.update()
+			//console.log("end ", Math.floor(p.x), Math.floor(p.y), Math.floor(p.z) )
+
 		}
 	},
 
