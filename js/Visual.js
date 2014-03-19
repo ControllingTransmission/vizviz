@@ -263,7 +263,7 @@ Visual = Proto.clone().newSlots({
 	
 	keydown: function(e)
 	{
-		console.log("e.keyCode " + e.keyCode)
+		//console.log("e.keyCode " + e.keyCode)
 		var k = this.keyForKeyCode(e.keyCode)
 
 		if (e.keyCode == 38) // right arrow
@@ -283,7 +283,13 @@ Visual = Proto.clone().newSlots({
 			Palettes.next()
 			return
 		}
-				
+		
+		if (e.keyCode == 220) // backslash key
+		{
+			//console.log("nextFollowStyle")
+			this.targetPoint().nextFollowStyle()
+		}
+		
 		/*
 		if (e.keyCode == 39) // right arrow
 		{
