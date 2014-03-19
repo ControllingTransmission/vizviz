@@ -75,7 +75,7 @@ TriangleBlockMover = Mover.clone().newSlots({
 			
 			if (dz < .001)
 			{
-				this.thing().toggleWireframe()
+				// this.thing().toggleWireframe()
 				//this.thing().object().material.wireframe.true
 				//this.thing().object().material.needsUpdate = true
 				this.thing().removeMover(this)
