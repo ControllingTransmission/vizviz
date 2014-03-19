@@ -36,11 +36,10 @@ TriangleDropMover = Mover.clone().newSlots({
 	
 	update: function()
 	{
-		//this.position().z = this.position().z * 0.97
 		this.position().z = this.position().z * 0.95
 		var op = this.opacity()
 		//this.setOpacity(op + (1-op)*.01)
-		if(this.position().z < 0.03)
+		if(this.position().z < 0.02)
 		{
 			this.position().z = 0
 			this.thing().removeMover(this)
@@ -54,7 +53,7 @@ Movers.add(TriangleDropMover)
 
 TriangleBlockMover = Mover.clone().newSlots({
 	protoType: "TriangleBlockMover",
-	maxHeight: 1,
+	maxHeight: .5,
 	defaultHeight: .001, // Prism.defaultHeight()
 	key: "",
 	shouldStart: false,
@@ -76,7 +75,7 @@ TriangleBlockMover = Mover.clone().newSlots({
 			
 			if (dz < .001)
 			{
-				//this.thing().toggleWireframe()
+				this.thing().toggleWireframe()
 				//this.thing().object().material.wireframe.true
 				//this.thing().object().material.needsUpdate = true
 				this.thing().removeMover(this)
