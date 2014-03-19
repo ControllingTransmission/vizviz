@@ -125,6 +125,10 @@ TargetPoint = Proto.clone().newSlots({
 		if (this.autoRotate())
 		{
 			this._cameraRotTarget = -Math.PI/2 + this._t /100
+			if (this._t > 10)
+			{
+				this._t = 0
+			}
 		}
 		else
 		{
