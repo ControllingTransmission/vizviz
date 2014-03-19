@@ -214,7 +214,7 @@ BlackBlock = Group.clone().newSlots({
 	finish: function()
 	{
 		this._isDone = true
-		this._rebirthCountdown = this._max
+		this._rebirthCountdown = Math.floor(this._max*1.5)
 		if (!this._isTop)
 		{
 			this._rebirthCountdown = Math.floor(this._rebirthCountdown/2)
@@ -320,6 +320,15 @@ WaveGroup = Group.clone().newSlots({
 		
 		this.removeStrip()
 		this.addItem(strip)
+		
+		/*
+		var firstStrip = this._items[0]
+		if (firstStrip)
+		{
+			strip.copyMoversFrom(firstStrip)
+		}
+		*/
+		
 		return strip
 	},
 		
