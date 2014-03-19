@@ -75,6 +75,16 @@ WaveStrip = Group.clone().newSlots({
 		}
 	},
 
+	setMover: function(name, m)
+	{
+		console.log('set mover')
+		this.setItemMover(name, m)
+		// this.items().forEach(function(item){ 
+		// 	console.log(item)
+			 
+		// })
+	},
+
 	addXY: function(x, y, inverted)
 	{
 		var h = Math.sqrt(3)/2.0
