@@ -284,6 +284,12 @@ Visual = Proto.clone().newSlots({
 			return
 		}
 		
+		if (k == "Y")
+		{
+			this.targetPoint().pulse()
+			return
+		}
+		
 		if (e.keyCode == 220) // backslash key
 		{
 			//console.log("nextFollowStyle")

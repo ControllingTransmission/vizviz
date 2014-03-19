@@ -42,9 +42,6 @@ TargetPoint = Proto.clone().newSlots({
 		this._cameraRotCurrent -= (this._cameraRotCurrent - this._cameraRotTarget)*.01
 		camera.rotateOnAxis( new THREE.Vector3( 0, 0, 1 ), this._cameraRotCurrent);
 		
-	 	//var look = new THREE.Vector3(this._position.x, 0, this._position.z)
-		//camera.lookAt(look)
-		
 		this._minZCurrent -= (this._minZCurrent - this._minZTarget)*0.01 
 		
 		if (camera.position.z < this._minZCurrent )
@@ -53,9 +50,21 @@ TargetPoint = Proto.clone().newSlots({
 		}
 	},
 	
+	pulse: function()
+	{
+		var camera = this.camera()
+		camera.position.z += 2
+		//this._cameraZoffset = 15
+		console.log("pulse")
+	},
+	
 	lookAt: function(p)
 	{
-		//cameraZoffset
+		//this._cameraZoffset *= .99
+		//var z = camera.position.z
+		//camera.position.z -= this._cameraZoffset
+		var camera = this.camera()
+		camera.lookAt(p)
 	},
 	
 	followTop: function()
@@ -66,8 +75,7 @@ TargetPoint = Proto.clone().newSlots({
 		camera.position.x -= (camera.position.x - this._position.x)*.05
 		camera.position.z -= (camera.position.z - this._position.z)*0.05 
 
-		var camera = this.camera()
-		camera.lookAt(this._position)
+		this.lookAt(this._position)
 		
 		//this._cameraRotTarget = -Math.PI/2
 		this._cameraRotTarget = 0
@@ -87,8 +95,8 @@ TargetPoint = Proto.clone().newSlots({
 
 		//camera.lookAt(this._position)
 		//camera.rotateOnAxis( new THREE.Vector3( 0, 0, 1 ), (Math.PI)*Math.sin(this._t/150)*Math.sin(3 + this._t/150));
-		var camera = this.camera()
-		camera.lookAt(this._position)
+		this.lookAt(this._position)
+
 		
 		this._cameraRotTarget = (Math.PI)*Math.sin(this._t/150)*Math.sin(3 + this._t/150)
 		this.updateCameraRot()
@@ -105,9 +113,8 @@ TargetPoint = Proto.clone().newSlots({
 		camera.position.y -= (camera.position.y - this._position.y)*.05
 		camera.position.z -= (camera.position.z - this._position.z)*.05
 
-		var camera = this.camera()
-		var p = this._position.clone()
-		camera.lookAt(p)
+		this.lookAt(this._position)
+
 		//camera.rotateOnAxis( new THREE.Vector3( 0, 0, 1 ), (Math.PI)*Math.sin(this._t/150)*Math.sin(3 + this._t/150));
 		this._cameraRotTarget = -Math.PI/2
 		//this._cameraRotTarget = (Math.PI)*Math.sin(this._t/150)*Math.sin(3 + this._t/150)
