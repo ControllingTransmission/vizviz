@@ -83,14 +83,11 @@ Cycle = Proto.clone().newSlots({
 	{
 		var y = this.position().y
 		
-		//console.log("cycle x: ", this.position().x)
 		this.handleMaxes()
 
-		var m = 6
+		var m = 4
 		if (y > m && this._yDirection > 0)
-		{
-			this.turn()
-		}
+
 		if (y < -m && this._yDirection < 0)
 		{
 			this.turn()
@@ -109,8 +106,6 @@ Cycle = Proto.clone().newSlots({
 		//console.log(this.position().x)
 		
 		this.position().y += this._yDirection * .17 * 2.64
-	//	this.position().x += 1
-		//this.position().y += this._yDirection * 1/WaveGroup.rate()
 		
 		this.trail().setEndPoint(this.position().clone())
 	},

@@ -15,6 +15,7 @@ Visual = Proto.clone().newSlots({
 	targetPoint: null,
 	cycle: null,
 	t: 0,
+	autoChangeColor: false
 }).setSlots({
 	go: function()
 	{
@@ -198,8 +199,9 @@ Visual = Proto.clone().newSlots({
 		
 		this.cycle().step()
 		this.targetPoint().step()
-		this._t += 1
-		if (this._t % (60*5) == 0)
+
+		this._t ++
+		if (this._t % (60*5) == 0 && this.autoChangeColor())
 		{
 			Palettes.next()
 		}
@@ -272,6 +274,11 @@ Visual = Proto.clone().newSlots({
 			return
 		}
 
+		if (k == "A")
+		{
+			this._autoChangeColor = !this._autoChangeColor
+		}
+
 		if (k == "[")
 		{
 			Palettes.previous()
@@ -293,6 +300,15 @@ Visual = Proto.clone().newSlots({
 		if (k == "P")
 		{
 			this.targetPoint().toggleAutoRotate()
+			return
+		}
+
+		if (k == "B")
+		{
+			if(this.getBackgroundColor() == 'rgb(255, 255, 255)')
+				this.setBackgroundColor(0,0,0);
+			else
+				this.setBackgroundColor(255,255,255);
 			return
 		}
 		
@@ -360,6 +376,16 @@ Visual = Proto.clone().newSlots({
 	keyup: function(e)
 	{
 		this.downKeys()[e.keyCode] = false 
+
+		var k = this.keyForKeyCode(e.keyCode)
+
+		if (k == "B")
+		{
+			if(this.getBackgroundColor() == 'rgb(0, 0, 0)')
+				this.setBackgroundColor(255,255,255);
+
+			return
+		}
 		
 		/*
 		if(this.selectLayerWithEvent(e) == false)
@@ -379,6 +405,16 @@ Visual = Proto.clone().newSlots({
 		//console.log(this.protoType() + " set " + s)
 		document.body.style.backgroundColor = s
 		return this
+	},
+
+	getBackgroundColor: function()
+	{
+		return document.body.style.backgroundColor
+	},
+
+	rotateBackgroundColor: function()
+	{
+		return
 	}
 })
 
