@@ -8,8 +8,9 @@ TrailSegment = Thing.clone().newSlots({
 	init: function()
 	{
 		Thing.init.apply(this)
-		this._startPoint = new THREE.Vector3( 0, 0, -.9 )
-		this._endPoint   = new THREE.Vector3( 0, 0, -.9 )		
+		var z = -0.9
+		this._startPoint = new THREE.Vector3( 0, 0, z)
+		this._endPoint   = new THREE.Vector3( 0, 0, z )		
 		this.setup()
 	},
 	
@@ -60,8 +61,8 @@ TrailSegment = Thing.clone().newSlots({
 		var dz = this._endPoint.z - this._startPoint.z
 		
 		var w = this._width
-		var z = -.95
-		z = this._endPoint.z
+		var z = .3 //-.95
+		//z = this._endPoint.z
 		
 		// start left
 		var p0 = this._object.geometry.vertices[0] 

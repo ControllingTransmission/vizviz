@@ -198,7 +198,7 @@ Visual = Proto.clone().newSlots({
 		
 		this.cycle().step()
 		this.targetPoint().step()
-		this._t ++
+		this._t += 1
 		if (this._t % (60*5) == 0)
 		{
 			Palettes.next()

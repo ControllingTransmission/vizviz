@@ -36,7 +36,8 @@ TriangleDropMover = Mover.clone().newSlots({
 	
 	update: function()
 	{
-		this.position().z = this.position().z * 0.95
+		//this.position().z = this.position().z * 0.95
+		this.position().z = this.position().z * 0.94
 		var op = this.opacity()
 		//this.setOpacity(op + (1-op)*.01)
 		if(this.position().z < 0.02)
@@ -68,7 +69,8 @@ TriangleBlockMover = Mover.clone().newSlots({
 				
 			var targetScale = this.maxHeight()/this.defaultHeight()
 			var dz = (targetScale - this.object().scale.z)
-			this.object().scale.z += dz*.05
+			//this.object().scale.z += dz*.05
+			this.object().scale.z += dz*.4
 			var h = this.object().scale.z*this.defaultHeight()
 			
 			this.object().position.z = h/2
@@ -199,7 +201,7 @@ ScaleMover = Mover.clone().newSlots({
 // -----------------------------------------------------
 
 
-
+/*
 WaveMover = Mover.clone().newSlots({
 	protoType: "WaveMover",
 	amplitude: 2000,
@@ -218,12 +220,12 @@ WaveMover = Mover.clone().newSlots({
 		var r = Math.sqrt(x*x + y*y)
 		var tt = r + Math.PI*this._t/this._period
 		this.object().scale.z = (Math.sin(tt)+1) * 0.5 * this._amplitude
-		this._t ++	
+		this._t += 1	
 	}
 })
 
 Movers.add(WaveMover)
-
+*/
 
 WaveMoverX = Mover.clone().newSlots({
 	protoType: "WaveMoverX",

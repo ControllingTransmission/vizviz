@@ -61,6 +61,7 @@ WaveStrip = Group.clone().newSlots({
 					h = this.items().length - y - 1
 				}
 				var triangle = this.items()[h]
+				//console.log("triangle = ", triangle.x(), ",", triangle.y())
 				triangle.darken()
 				var mover = TriangleBlockMover.clone().setBlock(block)
 				triangle.addMover(mover)
@@ -196,11 +197,13 @@ BlackBlock = Group.clone().newSlots({
 		
 		if (this.isTop())
 		{
+			Cycle.willBeginTopBlock()
 			this._current = 0
 			this._goingDown = false
 		}
 		else
 		{
+			Cycle.willBeginBottomBlock()
 			this._current = this.max()
 			this._goingDown = true
 		}
@@ -273,11 +276,12 @@ WaveGroup = Group.clone().newSlots({
 	//cachedStrips: null,
 	maxStripCount: 40,
 	block: BlackBlock.clone(),	
-	rate: 10,
+	rate: 4, 
 }).setSlots({
 	init: function()
 	{
 		Group.init.apply(this)
+
 		//this.setCachedStrips([])
 		this.addStrip()
 		this._object.position.y -= 3.5

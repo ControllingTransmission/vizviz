@@ -4,8 +4,8 @@ TargetPoint = Proto.clone().newSlots({
 	position: null,
 	yForce: 0,
 	maxYForce:.1,
-	yVelocity: 0,
-	yDirection: 0,
+	//yVelocity: 0,
+	//yDirection: 0,
 	t: 0,
 	trail: null,
 	minDist: 10,
@@ -94,7 +94,8 @@ TargetPoint = Proto.clone().newSlots({
 		this._minZTarget = 6
 		
 		var camera = this.camera()
-		camera.position.x -= (camera.position.x - this._position.x)*.01
+		//camera.position.x -= (camera.position.x - this._position.x)*.01
+		camera.position.x -= (camera.position.x - this._position.x)*.03
 		camera.position.y -= (camera.position.y - this._position.y)*.1
 		camera.position.z -= (camera.position.z - this._position.z)*.1
 
