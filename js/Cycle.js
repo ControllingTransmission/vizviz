@@ -38,38 +38,27 @@ Cycle = Proto.clone().newSlots({
 		if (this._topBlockXs.length && this.x() > this._topBlockXs[0])
 		{
 			this._topBlockXs.shift()
-			//this.turn()
-			//console.log("this._topBlockXs.length = ", this._topBlockXs.length)
 		}
 		
 		if (this._bottomBlockXs.length && this.x() > this._bottomBlockXs[0])
 		{
-			//this.turn()
 			this._bottomBlockXs.shift()
-			//console.log("this._bottomBlockXs.length = ", this._bottomBlockXs.length)
 		}
-		
-		//console.log("minY: ", this.minY())
-		//console.log("maxY: ", this.maxY())
 	},
 	
 	maxY: function()
 	{
-		//console.log("this._topBlockXs.length ", this._topBlockXs.length)
 		if (this._topBlockXs.length)
 		{
 			var x = this._topBlockXs[0]
 			return (x - this.x()) 
 		}
 		
-		console.log("max")
 		return 12
 	},
 	
 	minY: function()
 	{
-		//console.log("this._bottomBlockXs.length ", this._bottomBlockXs.length)
-
 		if (this._bottomBlockXs.length)
 		{
 			var x = this._bottomBlockXs[0]
@@ -85,6 +74,8 @@ Cycle = Proto.clone().newSlots({
 		
 		this.handleMaxes()
 
+		// y bounds enforcement
+		
 		var m = 4
 		if (y > m && this._yDirection > 0)
 
@@ -92,6 +83,8 @@ Cycle = Proto.clone().newSlots({
 		{
 			this.turn()
 		}
+		
+		// auto turns
 		
 		if (y > this.maxY() && this._yDirection > 0)
 		{
@@ -101,10 +94,7 @@ Cycle = Proto.clone().newSlots({
 		{
 			this.turn()
 		}
-		
-		
-		//console.log(this.position().x)
-		
+			
 		this.position().y += this._yDirection * .17 * 2.64
 		
 		this.trail().setEndPoint(this.position().clone())
