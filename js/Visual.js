@@ -312,10 +312,30 @@ Visual = Proto.clone().newSlots({
 			return
 		}
 		
-		if (e.keyCode == 220) // backslash key
+		// --- follow controls ---
+		
+		if (k == "G") 
 		{
-			//console.log("nextFollowStyle")
-			this.targetPoint().nextFollowStyle()
+			this.targetPoint().setFollowMethodName("followTop")
+			return
+		}
+		
+		if (k == "H") 
+		{
+			this.targetPoint().setFollowMethodName("follow")
+			return
+		}
+		
+		if (k == "J") 
+		{
+			this.targetPoint().setFollowMethodName("followSpin")
+			return
+		}
+		
+		if (k == "K") 
+		{
+			this.targetPoint().setFollowMethodName("followSpinR")
+			return
 		}
 		
 		/*
@@ -330,21 +350,28 @@ Visual = Proto.clone().newSlots({
 			return
 		}
 		*/
-		
-		/*
-		if (k == ";") 
+
+/*
+		if (k == "V") 
+		{
+			this.setBackgroundColor(1, 1, 1)
+			return 
+		}
+	*/			
+		if (k == "B") 
 		{
 			this.setBackgroundColor(1, 0, 0)
 			return 
 		}
 		
-		if (k == "'") 
+		/*
+		if (k == "N") 
 		{
 			this.setBackgroundColor(0, 0, 1)
 			return 
 		}
 		
-		if (k == "L") 
+		if (k == "M") 
 		{
 			this.setBackgroundColor(0, 0, 0)
 			return 

@@ -9,14 +9,16 @@ TargetPoint = Proto.clone().newSlots({
 	t: 0,
 	trail: null,
 	minDist: 10,
-	followMethods: ["followTop", "follow", "followBack"],
-	followMethodNumber: 0,
+	//followMethods: ["followTop", "follow", "followSpin", "followSpinR"], // "followBack"],
+	//followMethodNumber: 0,
+	followMethodName: "followTop",
 	cameraRotCurrent: 0,
 	cameraRotTarget: 0,
 	minZCurrent: 10,
 	minZTarget: 10,
 	cameraZoffset: 0,
 	autoRotate: true,
+	
 }).setSlots({
 	init: function()
 	{
@@ -45,6 +47,9 @@ TargetPoint = Proto.clone().newSlots({
 	{
 		var camera = this.camera()
 
+		var pi = 3.1415926535897932384
+
+		
 		this._cameraRotCurrent -= (this._cameraRotCurrent - this._cameraRotTarget)*.01
 		camera.rotateOnAxis( new THREE.Vector3( 0, 0, 1 ), this._cameraRotCurrent);
 		
@@ -108,6 +113,43 @@ TargetPoint = Proto.clone().newSlots({
 		this.updateCameraRot()
 	},
 	
+	followSpin: function()
+	{
+		this._minZTarget = 6
+		
+		var camera = this.camera()
+		camera.position.x -= (camera.position.x - this._position.x)*.03
+		camera.position.y -= (camera.position.y - this._position.y)*.1
+		camera.position.z -= (camera.position.z - this._position.z)*.1
+
+		//camera.lookAt(this._position)
+		//camera.rotateOnAxis( new THREE.Vector3( 0, 0, 1 ), (Math.PI)*Math.sin(this._t/150)*Math.sin(3 + this._t/150));
+		this.lookAt(this._position)
+
+		this._cameraRotTarget += .05		
+		this.updateCameraRot()
+	},
+	
+	followSpinR: function()
+	{
+		this._minZTarget = 6
+		
+		var camera = this.camera()
+		camera.position.x -= (camera.position.x - this._position.x)*.03
+		camera.position.y -= (camera.position.y - this._position.y)*.1
+		camera.position.z -= (camera.position.z - this._position.z)*.1
+
+		//camera.lookAt(this._position)
+		//camera.rotateOnAxis( new THREE.Vector3( 0, 0, 1 ), (Math.PI)*Math.sin(this._t/150)*Math.sin(3 + this._t/150));
+		var p = this._position.clone()
+		p.y = 0
+		p.z = 0
+		this.lookAt(p)
+
+		this._cameraRotTarget -= .05	
+		this.updateCameraRot()
+	},
+	
 	followBack: function()
 	{
 		this._minZTarget = 1.1
@@ -147,14 +189,14 @@ TargetPoint = Proto.clone().newSlots({
 		this.trail().setEndPoint(end)
 	},
 	
-	followMethodName: function()
+	setFollowMethodName: function(name)
 	{
-		return this.followMethods()[this.followMethodNumber()]
+		var pi = 3.14159
+		this._cameraRotCurrent %= (2*pi)
+		this._cameraRotTarget %= (2*pi)
+		this._followMethodName = name
+		return this
 	},
 	
-	nextFollowStyle: function()
-	{
-		this._followMethodNumber = (this._followMethodNumber + 1) % this.followMethods().length		
-		console.log("methodName = ", this.followMethodName())
-	}
+
 })
