@@ -15,12 +15,15 @@ Cycle = Proto.clone().newSlots({
 	{
 		var y = this.position().y
 		
-		if (Math.abs(y) > 5)
+		if (Math.abs(y) > 5 && y*this._yDirection > 0)
 		{
 			this.turn()
+			// console.log('TURN')
 		}
 
 		this.position().y += this._yDirection * .17;
+		// console.log(y+ " " +this._yDirection + " " + y*this._yDirection)
+
 		//this.position().y += this._yDirection * 1/WaveGroup.rate()
 		
 		this.trail().setEndPoint(this.position().clone())
