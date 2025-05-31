@@ -3,6 +3,11 @@ Wave Wave
 
 viz for Wave Wave game thing
 
+## Demo
+
+You can view the live demo at: https://controllingtransmission.github.io/vizviz/
+
+## Controls
 
 Key map:
 
